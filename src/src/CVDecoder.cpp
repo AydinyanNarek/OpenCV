@@ -5,14 +5,6 @@
 #include "opencv2/video.hpp"
 #include <future>
 
-/*void CVDecoder::write(const std::vector<cv::Mat>& img, bool color) {
-
-    cv::VideoWriter video2("outcpp.avi", CV_FOURCC('M','J','P','G'), mFrameRate, cv::Size(mWidth, mHeight), color);
-    for(auto & it : img) {
-        video2.write(it);
-    }
-    video2.release();
-}*/
 
 CVDecoder::CVDecoder(const std::vector<std::string>& file) : BaseVideo(file), mVideoCap(BaseVideo::CVMAKE<cv::VideoCapture*>(0)) {
     try{

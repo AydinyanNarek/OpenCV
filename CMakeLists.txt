@@ -118,6 +118,7 @@ set(comp_vision_source_dir ${CMAKE_CURRENT_SOURCE_DIR}/src)
 set(comp_vision_source_files
     ${comp_vision_source_dir}/src/main.cpp 
     ${comp_vision_source_dir}/src/CVDecoder.cpp
+    ${comp_vision_source_dir}/src/CVEncoder.cpp
     ${comp_vision_source_dir}/src/Filters.cpp
     ${comp_vision_source_dir}/src/VideoOverlayer.cpp
 )

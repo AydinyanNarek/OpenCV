@@ -26,7 +26,6 @@ private:
     void releaseBuffers();
     void free(std::unique_ptr<typename std::remove_pointer<video>::type, void (*)(video)> ptr);
     std::vector<cv::Mat> resize(const std::vector<cv::Mat>& moving);
-
     
 private:
     

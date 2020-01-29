@@ -26,14 +26,11 @@ public:
     virtual ~BaseVideo() = default;
 
 public:
-    int getWidth() const { return mWidth;}
-    int getHeight() const { return mHeight;}
-    int getFrameRate() const { return mFrameRate;}
-    void setWidth(int width)  { mWidth = width;}
-    void setHeight(int height)  { mHeight = height; }
-    void setFrameRate(int framerate) { mFrameRate = framerate; }
     const std::vector<std::vector<cv::Mat>>& getDecodedImages () { return mOverlayBuffer; }
-    virtual void decode() {};
+    const int getWidth() { return mWidth; }
+    const int getHeight() { return mHeight; }
+
+    virtual void decode() {}
 protected:
     int mWidth = 0;
     int mHeight = 0;
