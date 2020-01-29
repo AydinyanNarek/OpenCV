@@ -88,7 +88,7 @@ set(OPENCV_BINARY_LOCATION "${OPENCV_DIR}/lib")
 set(OPENCV_INCLUDE_LOCATION "${OPENCV_DIR}/include/opencv4")
 
 include_directories(${OPENCV_INCLUDE_LOCATION})
-include_directories(${UTILITIES_SOURCE_DIR})
+include_directories("${UTILITIES_SOURCE_DIR}/include")
 
 
 if(UNIX)

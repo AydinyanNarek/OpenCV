@@ -3,6 +3,7 @@
 #include <vector>
 #include <memory>
 #include "opencv2/opencv.hpp"
+#include "ErrorManager/ErrorRegister.h"
 
 class BaseVideo {
 
@@ -11,13 +12,18 @@ template<class T>
     static auto CVMAKE(T object) {
         return std::unique_ptr<typename std::remove_pointer<T>::type, void (*)(T)>(object, [](T object) { delete object; });
     }
+    /**
+     * @brief Registers all project errors
+    **/
+    static void registerErrors();    
 
 public:
     BaseVideo() = default;
     explicit BaseVideo(const std::vector<std::string>& file){
         if (file.size() < 2) {
-            throw("the input must contain at least 2 files");
+            Errors::ErrorRegister::Throw("InvaliedInputArgumentError", "the input must contain at least 2 files");
         }
+
         mFile = file.at(0);
         for(size_t i = 1; i < file.size(); ++i){
             mOverlays.emplace_back(std::move(file[i]));

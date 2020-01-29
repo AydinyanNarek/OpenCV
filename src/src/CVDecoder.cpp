@@ -5,6 +5,15 @@
 #include "opencv2/video.hpp"
 #include <future>
 
+void BaseVideo::registerErrors() {
+    Errors::ErrorRegister::registerErrors({
+        {"FileOpenError",                   "Faild to open input file."},
+        {"InvaliedInputArgumentError",      "Invalied input argument."},
+        {"InvaliedFileFormatError",         "Output file format not supported."},
+        {"InvaliedCodecError",              "Video Encoder not supported or not available for container."},
+        {"UnregisteredTypeError",           "Faild to use the type as it is not supported."}
+    });
+}
 
 CVDecoder::CVDecoder(const std::vector<std::string>& file) : BaseVideo(file), mVideoCap(BaseVideo::CVMAKE<cv::VideoCapture*>(0)) {
     try{
@@ -12,7 +21,7 @@ CVDecoder::CVDecoder(const std::vector<std::string>& file) : BaseVideo(file), mV
     }
     catch(...) {
         releaseBuffers();
-        throw("cant open\n");
+        Errors::ErrorRegister::Throw("FileOpenError");
     }
 }
 
@@ -37,7 +46,7 @@ void CVDecoder::openFile() {
     std::lock_guard<std::mutex>lock(mt);
     mVideoCap = BaseVideo::CVMAKE(new cv::VideoCapture(mFile));
     if(!mVideoCap->isOpened()) {
-        throw("cant open\n");
+        Errors::ErrorRegister::Throw("FileOpenError");
     }
     mFrameRate = mVideoCap->get(CV_CAP_PROP_FPS);
     mWidth = mVideoCap->get(CV_CAP_PROP_FRAME_WIDTH);
@@ -51,7 +60,7 @@ void CVDecoder::initialize() {
     for(auto&& it : mOverlays) {
         auto temp = BaseVideo::CVMAKE(new cv::VideoCapture(it));
         if(!temp->isOpened()) {
-            throw("cant open\n");
+            Errors::ErrorRegister::Throw("FileOpenError");
         }
         mVideoCapturesBuffer.emplace_back(std::move(temp));
     }
