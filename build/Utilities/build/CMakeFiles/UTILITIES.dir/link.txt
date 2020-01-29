@@ -1,0 +1,2 @@
+/usr/bin/ar qc libUTILITIES.a  CMakeFiles/UTILITIES.dir/src/ErrorRegister.cpp.o
+/usr/bin/ranlib libUTILITIES.a

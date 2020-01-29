@@ -1,28 +1,31 @@
 #include "../include/Filters.h"
 
 std::vector<cv::Mat> Filters::overlay(const std::vector<cv::Mat>& background, const std::vector<cv::Mat>& moving, const std::vector<cv::Mat>& mask) {
-    auto frameNum = std::min(mBackground.size(), moving.size());
+    auto frameNum = std::min(background.size(), moving.size());
     std::vector<cv::Mat> output;
+    output.resize(background.size());
     cv::Mat temp1;
     cv::Mat temp2;
     cv::Mat temp3;
     for (int i  = 0; i  < frameNum; ++i) {
         cv::bitwise_not(mask[i], temp3);
         
-        //temp1 = mask[i].mul(moving[i]);
-        //temp2 = temp3.mul(background[i]);
+        temp1 = mask[i].mul(moving[i]);
+        temp2 = temp3.mul(background[i]);
         //cv::multiply(mask[i], moving[i], temp1);
         //cv::multiply(temp3, background[i], temp2);
-       // cv::bitwise_and(moving[i],moving[i],temp1, mask[i]);
-      //  cv::bitwise_and(background[i],background[i],temp2, temp3);
-        moving[i].copyTo(temp1, mask[i]);
-        mBackground[i].copyTo(temp2, temp3);
-        temp1.release();
-        temp2.release();
-        temp3.release();
-
-       // output.emplace_back(temp1 + temp2);
+        //moving[i].copyTo(temp1, mask[i]);
+        //background[i].copyTo(temp2, temp3);
+        auto temp = temp1 + temp2;
+            cv::imshow( "Frame", temp3 );
+        
+            // Press  ESC on keyboard to  exit
+            char c = (char)cv::waitKey(27);
+        
+        output.emplace_back(temp);
     }
+
+    return output;
     //write(output, true);
 }
 

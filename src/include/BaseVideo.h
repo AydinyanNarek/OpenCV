@@ -1,3 +1,9 @@
+//
+//  BaseVideo.h
+//
+//  Created by Narek Aydinyan on 01/28/20.
+//  Copyright © 2019 Narek Aydinyan. All rights reserved.
+//
 #pragma once
 #include <string>
 #include <vector>
@@ -5,6 +11,9 @@
 #include "opencv2/opencv.hpp"
 #include "ErrorManager/ErrorRegister.h"
 
+/**
+ * @brief Base class for video processing
+ **/
 class BaseVideo {
 
 public:
@@ -18,7 +27,15 @@ template<class T>
     static void registerErrors();    
 
 public:
+    /**
+     * @brief Base class default constructor
+     **/
     BaseVideo() = default;
+
+    /**
+     *   @brief Base class parametrized constructor
+     *   @param[in] file - vector of files to be decodeed
+     **/
     explicit BaseVideo(const std::vector<std::string>& file){
         if (file.size() < 2) {
             Errors::ErrorRegister::Throw("InvaliedInputArgumentError", "the input must contain at least 2 files");
@@ -29,14 +46,41 @@ public:
             mOverlays.emplace_back(std::move(file[i]));
         }
     };
+    /**
+     * @brief Base class destructor
+     **/
     virtual ~BaseVideo() = default;
 
 public:
-    const std::vector<std::vector<cv::Mat>>& getDecodedImages () { return mOverlayBuffer; }
+    /**
+     *   @brief Get decoded vector of vecotrs which containes vector of decoded images 
+     *   @param[out] vector of vecotrs - Containes decoded images which should be overlayed
+    **/
+    const std::vector<std::vector<cv::Mat>>& getDecodedMoveingVideo () { return mOverlayBuffer; }
+
+    /**
+     *   @brief Get decoded vector of images for background of the optput video 
+     *   @param[out] vector of images - Containes decoded images which should be used as output background
+    **/
+    const std::vector<cv::Mat>& getBackground () { return mBackground; }
+
+    /**
+     *   @brief Get background image width
+     *   @param[out] integer -image width
+    **/
     const int getWidth() { return mWidth; }
+
+    /**
+     *   @brief Get background image height
+     *   @param[out] integer -image height
+    **/
     const int getHeight() { return mHeight; }
 
+    /**
+     *   @brief Decode the input files and stores in vector of Mat type images
+    **/
     virtual void decode() {}
+
 protected:
     int mWidth = 0;
     int mHeight = 0;

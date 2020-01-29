@@ -5,10 +5,19 @@ VideoOverlay::VideoOverlay(const std::vector <std::string>& files, int frameRate
     mFilters (std::make_unique<Filters>()) {
     try {
         mDecoder->decode();
-        auto video = mDecoder->getDecodedImages();
+        auto video = mDecoder->getDecodedMoveingVideo();
         auto masks = mFilters->findMoveingObject(std::move(video[0]));
-        mEncoder = std::make_unique<CVEncoder>(frameRate, mDecoder->getWidth(), mDecoder->getHeight(), videoCodec, fileExtension, outFile);
-        mEncoder->encode(masks);
+        auto background = mDecoder->getBackground();
+
+        auto overlays = mFilters->overlay(background, video[0], masks);
+        for (auto & it : overlays) {
+            imshow( "Frame", it );
+        
+            // Press  ESC on keyboard to  exit
+            char c = (char)cv::waitKey(27);
+        }
+       // mEncoder = std::make_unique<CVEncoder>(frameRate, mDecoder->getWidth(), mDecoder->getHeight(), videoCodec, fileExtension, outFile);
+      //  mEncoder->encode(masks);
     }
     catch(cv::Exception& e) {
         throw (e.what());
