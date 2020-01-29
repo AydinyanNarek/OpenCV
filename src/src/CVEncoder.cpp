@@ -36,7 +36,7 @@ CVEncoder::CVEncoder(int frameRate, int width, int height, const std::string& vi
 
 
 void CVEncoder::encode(const std::vector<cv::Mat>& imageList) {
-    cv::VideoWriter video(mOutFile,  findEncoder(), mFramerate, cv::Size(mWidth, mHeight), false);
+    cv::VideoWriter video(mOutFile,  findEncoder(), mFramerate, cv::Size(mWidth, mHeight), true);
     for(const auto & it : imageList) {
         video.write(it);
     }

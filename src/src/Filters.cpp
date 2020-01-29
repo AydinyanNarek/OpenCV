@@ -2,31 +2,23 @@
 
 std::vector<cv::Mat> Filters::overlay(const std::vector<cv::Mat>& background, const std::vector<cv::Mat>& moving, const std::vector<cv::Mat>& mask) {
     auto frameNum = std::min(background.size(), moving.size());
-    std::vector<cv::Mat> output;
-    output.resize(background.size());
+    std::vector<cv::Mat> output(frameNum);
     cv::Mat temp1;
     cv::Mat temp2;
-    cv::Mat temp3;
-    for (int i  = 0; i  < frameNum; ++i) {
-        cv::bitwise_not(mask[i], temp3);
-        
-        temp1 = mask[i].mul(moving[i]);
-        temp2 = temp3.mul(background[i]);
-        //cv::multiply(mask[i], moving[i], temp1);
-        //cv::multiply(temp3, background[i], temp2);
-        //moving[i].copyTo(temp1, mask[i]);
-        //background[i].copyTo(temp2, temp3);
-        auto temp = temp1 + temp2;
-            cv::imshow( "Frame", temp3 );
-        
-            // Press  ESC on keyboard to  exit
-            char c = (char)cv::waitKey(27);
-        
-        output.emplace_back(temp);
-    }
+    cv::Mat maskInv;
 
+    for (int i  = 0; i  < frameNum; ++i) {
+
+        cv::bitwise_not(mask[i], maskInv);
+        temp1 = moving[i];
+        temp1.setTo(0, maskInv);
+        temp2 = background[i];
+        temp2.setTo(0, mask[i]);
+        auto gyot = cv::countNonZero((mask[i]));
+        output.emplace_back(temp1 + temp2);
+
+    }
     return output;
-    //write(output, true);
 }
 
 
