@@ -1,1 +1,0 @@
-/home/nareka/Desktop/GITHUBProjects/OpenCV/build/Utilities/install/lib/libUTILITIES.a

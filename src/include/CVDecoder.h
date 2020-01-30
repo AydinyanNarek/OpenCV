@@ -27,13 +27,13 @@ public:
     explicit CVDecoder(const std::vector<std::string>& file);
 
     /**
-     * @brief CVDecoder class destructor which clean ups memory for alocated images
+     * @brief CVDecoder class destructor which clean ups memory for allocated images
      **/
     ~CVDecoder();
 
 public:
     /**
-     * @brief Initialize the input files, get video prperties and checks validation of the files
+     * @brief Initialize the input files, get video properties and checks validation of the files
      **/
     void initialize();
 
@@ -57,12 +57,12 @@ private:
     std::vector<cv::Mat> readVideo(std::unique_ptr<typename std::remove_pointer<video>::type, void (*)(video)> ptr);
 
     /**
-     *   @brief Release all buffers which were alocated for storeing the images.
+     *   @brief Release all buffers which were allocated for storeing the images.
     **/
     void releaseBuffers();
 
     /**
-     *   @brief Fres the memory which were alocated for creating cv::VideoCapture object
+     *   @brief Fres the memory which were allocated for creating cv::VideoCapture object
      *   @param[in] ptr - Smart pointer of type VideoCapture
     **/
     void free(std::unique_ptr<typename std::remove_pointer<video>::type, void (*)(video)> ptr);
@@ -70,7 +70,7 @@ private:
     /**
      *   @briefResize the overlay image size to background image size and store the image to vector
      *   @param[in] vector - Vector of images to be resized 
-     *   @param[out] vector - Vector of images olready resized 
+     *   @param[out] vector - Vector of images already resized 
     **/
     std::vector<cv::Mat> resize(const std::vector<cv::Mat>& moving);
     

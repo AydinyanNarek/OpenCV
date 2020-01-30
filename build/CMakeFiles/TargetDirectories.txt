@@ -1,3 +1,0 @@
-/home/nareka/Desktop/GITHUBProjects/OpenCV/build/CMakeFiles/rebuild_cache.dir
-/home/nareka/Desktop/GITHUBProjects/OpenCV/build/CMakeFiles/exe.dir
-/home/nareka/Desktop/GITHUBProjects/OpenCV/build/CMakeFiles/edit_cache.dir

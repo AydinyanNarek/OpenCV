@@ -24,7 +24,7 @@ public:
     std::vector<cv::Mat> findMoveingObject(const std::vector< cv::Mat>&);
 
     /**
-     * @brief Overlayes the moving video to background using masks
+     * @brief Overlay's the moving video to background using masks
      *   @param[in] vector -  Vector of images of background
      *   @param[in] vector -  Vector of moving images to be overlayed
      *   @param[in] vector -  Vector of image masks
@@ -42,7 +42,7 @@ private:
     std::vector<cv::Mat> subtractBackground(const std::vector<cv::Mat>&);
 
     /**
-     *  @brief Struct Contours - Image cotoures and theyer hierarchy
+     *  @brief Struct Contours - Image contours and theyer hierarchy
      **/
     struct Contours
     {
@@ -53,8 +53,8 @@ private:
 
     /**
      *  @brief Selects only largest components in the binary image
-     *   @param[in] img -  Image to be slected
-     *   @param[in] cont - Image cotoures and theyer hierarchy
+     *   @param[in] img -  Image to be selected
+     *   @param[in] cont - Image contours and theyer hierarchy
      *   @param[out] dst - Destination image already filtered
      **/
     void filterObjects(const cv::Mat& img, const Contours & cont, cv::Mat& dst);
@@ -64,7 +64,7 @@ private:
      *   @param[in] rect - Object bounding box
      *   @param[in] begin - Image start for tracking
      *   @param[in] next - Image next for tracking
-     *   @param[in] tracker - OpencCV traker for tracking images
+     *   @param[in] tracker - OpenCV tracker for tracking images
      *   @param[out] Rect2d - Returns bounding box
      **/
     cv::Rect2d ojectTracker(const cv::Rect2d& rect, cv::Mat& begin, cv::Mat& next, cv::Ptr<cv::Tracker> tracker);

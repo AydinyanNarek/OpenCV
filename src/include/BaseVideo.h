@@ -38,7 +38,7 @@ public:
      **/
     explicit BaseVideo(const std::vector<std::string>& file){
         if (file.size() < 2) {
-            Errors::ErrorRegister::Throw("InvaliedInputArgumentError", "the input must contain at least 2 files");
+            Errors::ErrorRegister::Throw("InvalidInputArgumentError", "the input must contain at least 2 files");
         }
 
         mFile = file.at(0);
@@ -53,14 +53,14 @@ public:
 
 public:
     /**
-     *   @brief Get decoded vector of vecotrs which containes vector of decoded images 
-     *   @param[out] vector of vecotrs - Containes decoded images which should be overlayed
+     *   @brief Get decoded vector of vectors which contains vector of decoded images 
+     *   @param[out] vector of vectors - Contains decoded images which should be overlayed
     **/
     const std::vector<std::vector<cv::Mat>>& getDecodedMoveingVideo () { return mOverlayBuffer; }
 
     /**
      *   @brief Get decoded vector of images for background of the optput video 
-     *   @param[out] vector of images - Containes decoded images which should be used as output background
+     *   @param[out] vector of images - Contains decoded images which should be used as output background
     **/
     const std::vector<cv::Mat>& getBackground () { return mBackground; }
 

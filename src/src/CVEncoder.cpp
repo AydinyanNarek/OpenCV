@@ -16,11 +16,11 @@ int CVEncoder::findEncoder() {
 
     auto fileExtension = videoCodecsWithContainers.find(mFileExtension);
     if (fileExtension ==  videoCodecsWithContainers.end()) {
-        Errors::ErrorRegister::Throw("InvaliedFileFormatError");
+        Errors::ErrorRegister::Throw("InvalidFileFormatError");
     }
     auto codec = fileExtension->second.find(mVideoCodec);
     if (codec ==  fileExtension->second.end()) {
-        Errors::ErrorRegister::Throw("InvaliedCodecError");
+        Errors::ErrorRegister::Throw("InvalidCodecError");
     }
 
     return  CV_FOURCC((*codec)[0], (*codec)[1], (*codec)[2], (*codec)[3]);

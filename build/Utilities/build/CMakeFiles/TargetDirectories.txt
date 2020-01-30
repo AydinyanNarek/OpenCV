@@ -1,7 +1,0 @@
-/home/nareka/Desktop/GITHUBProjects/OpenCV/build/Utilities/build/CMakeFiles/install/strip.dir
-/home/nareka/Desktop/GITHUBProjects/OpenCV/build/Utilities/build/CMakeFiles/edit_cache.dir
-/home/nareka/Desktop/GITHUBProjects/OpenCV/build/Utilities/build/CMakeFiles/UTILITIES.dir
-/home/nareka/Desktop/GITHUBProjects/OpenCV/build/Utilities/build/CMakeFiles/install.dir
-/home/nareka/Desktop/GITHUBProjects/OpenCV/build/Utilities/build/CMakeFiles/rebuild_cache.dir
-/home/nareka/Desktop/GITHUBProjects/OpenCV/build/Utilities/build/CMakeFiles/list_install_components.dir
-/home/nareka/Desktop/GITHUBProjects/OpenCV/build/Utilities/build/CMakeFiles/install/local.dir

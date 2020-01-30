@@ -7,11 +7,11 @@
 
 void BaseVideo::registerErrors() {
     Errors::ErrorRegister::registerErrors({
-        {"FileOpenError",                   "Faild to open input file."},
-        {"InvaliedInputArgumentError",      "Invalied input argument."},
-        {"InvaliedFileFormatError",         "Output file format not supported."},
-        {"InvaliedCodecError",              "Video Encoder not supported or not available for container."},
-        {"UnregisteredTypeError",           "Faild to use the type as it is not supported."}
+        {"FileOpenError",                   "Failed to open input file."},
+        {"InvalidInputArgumentError",       "Invalid input argument."},
+        {"InvalidFileFormatError",          "Output file format not supported."},
+        {"InvalidCodecError",               "Video Encoder not supported or not available for container."},
+        {"UnregisteredTypeError",           "Failed to use the type as it is not supported."}
     });
 }
 
