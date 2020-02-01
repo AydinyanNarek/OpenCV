@@ -1,6 +1,7 @@
 
 #include "../include/VideoOverlayer.h"
 #include <stdexcept>
+#include <chrono> 
 
 //TODO'S
 //1.Add out of core implementation 
@@ -11,8 +12,14 @@
 //The same project could be also done useing FFMPEG, but I choosed OpenCV for trying something new for me
 
 int main () try {
+    auto start = std::chrono::high_resolution_clock::now();
 
     VideoOverlay ob ({"/home/nareka/Desktop/GITHUBProjects/OpenCV/testData/bacground2.avi", "/home/nareka/Desktop/GITHUBProjects/OpenCV/testData/test2.avi"}, 30, "FFV1", "avi", "/home/nareka/Desktop/GITHUBProjects/OpenCV/testData/out.avi");
+
+    auto finish = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> elapsed = finish - start;
+    std::cout << elapsed.count() << std::endl;
+
 }
 catch(const char* e){
     std::cout << e;

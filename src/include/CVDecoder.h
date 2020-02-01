@@ -73,6 +73,8 @@ private:
      *   @param[out] vector - Vector of images already resized 
     **/
     std::vector<cv::Mat> resize(const std::vector<cv::Mat>& moving);
+
+    void releaseFrames() ;
     
 private:
     

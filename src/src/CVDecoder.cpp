@@ -26,7 +26,9 @@ CVDecoder::CVDecoder(const std::vector<std::string>& file) : BaseVideo(file), mV
 }
 
 CVDecoder::~CVDecoder() {
+    auto future = std::async(&CVDecoder::releaseFrames, this);
     releaseBuffers();
+    future.get();
 }
 
 void CVDecoder::free(std::unique_ptr<typename std::remove_pointer<video>::type, void (*)(video)> ptr) {
@@ -42,6 +44,18 @@ void CVDecoder::releaseBuffers() {
         free(std::move(it));
     }
 }
+
+void CVDecoder::releaseFrames() {
+    for(auto&& overlays : mOverlayBuffer) {
+        for(auto&& it : overlays) {
+            it.release();
+        }
+    }
+    for(auto&& it : mBackground) {
+        it.release();
+    }
+}
+
 void CVDecoder::openFile() {
     std::lock_guard<std::mutex>lock(mt);
     mVideoCap = BaseVideo::CVMAKE(new cv::VideoCapture(mFile));
@@ -108,11 +122,4 @@ std::vector<cv::Mat> CVDecoder::resize(const std::vector<cv::Mat>& moveing) {
     return dest;
 }
 
-/*void CVDecoder::process() {
-    std::vector<cv::Mat> temp;
-    temp.resize(mOverlayBuffer[0].size());
-    resize(mOverlayBuffer[0], temp);
-    auto masks = findMoveingObject(temp);
-    overlay(mBackground, temp, masks);
-}*/
 
