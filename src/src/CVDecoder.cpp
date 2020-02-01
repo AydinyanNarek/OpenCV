@@ -72,6 +72,7 @@ void CVDecoder::initialize() {
 std::vector<cv::Mat> CVDecoder::readVideo(std::unique_ptr<typename std::remove_pointer<video>::type, void (*)(video)> ptr) {
     std::lock_guard<std::mutex>lock(mVideoReaderMutex);
     std::vector<cv::Mat> temp;
+    cv::Mat dest;
     for(;;) {
         cv::Mat frame;
         *(ptr) >> frame;
@@ -79,7 +80,10 @@ std::vector<cv::Mat> CVDecoder::readVideo(std::unique_ptr<typename std::remove_p
         if (frame.empty()) {
             break;
         }
-        temp.emplace_back(std::move(frame));
+        cv::resize(frame, dest, cv::Size(mWidth, mHeight));
+        temp.emplace_back(std::move(dest));
+        frame.release();
+        dest.release();
     }
     return temp;
 }
@@ -88,8 +92,7 @@ void CVDecoder::decode() {
     auto future = std::async(&CVDecoder::readVideo, this, std::move(mVideoCap));
     for(auto&& it : mVideoCapturesBuffer) {
         auto overlay = readVideo(std::move(it));
-        auto temp = resize(overlay);
-        mOverlayBuffer.emplace_back(std::move(temp));
+        mOverlayBuffer.emplace_back(std::move(overlay));
     }
     mBackground = future.get();
 }
