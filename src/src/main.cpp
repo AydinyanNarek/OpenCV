@@ -12,7 +12,7 @@
 
 int main () try {
 
-    VideoOverlay ob ({"../../testData/bacground2.avi", "../../testData/test2.avi"}, 30, "FFV1", "avi", "../../testData/out.avi");
+    VideoOverlay ob ({"/home/nareka/Desktop/GITHUBProjects/OpenCV/testData/bacground2.avi", "/home/nareka/Desktop/GITHUBProjects/OpenCV/testData/test2.avi"}, 30, "FFV1", "avi", "/home/nareka/Desktop/GITHUBProjects/OpenCV/testData/out.avi");
 }
 catch(const char* e){
     std::cout << e;
