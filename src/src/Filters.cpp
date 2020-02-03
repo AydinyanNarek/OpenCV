@@ -14,9 +14,7 @@ std::vector<cv::Mat> Filters::overlay(const std::vector<cv::Mat>& background, co
         temp1.setTo(0, maskInv);
         temp2 = background[i];
         temp2.setTo(0, mask[i]);
-        auto gyot = cv::countNonZero((mask[i]));
         output.emplace_back(temp1 + temp2);
-
     }
     return output;
 }
