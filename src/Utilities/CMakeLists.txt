@@ -41,8 +41,15 @@ if(NOT TARGET UTILITIES)
 		${UTILITIES_SOURCE_DIR}/ErrorRegister.cpp
 	)
 
+	# define header files
+		set(UTILITIES_HEADER_FILES
+		${UTILITIES_INCLUDE_DIR}/ErrorManager/ErrorRegister.h
+		${UTILITIES_INCLUDE_DIR}/FileSystem/ValidatePath.h
+	)
 	#add the main library
-	add_library(UTILITIES ${UTILITIES_SOURCE_FILES})
+	add_library(UTILITIES ${UTILITIES_SOURCE_FILES} ${UTILITIES_HEADER_FILES})
+
+	target_link_libraries (UTILITIES PUBLIC stdc++fs) 
 
 	#compilation options
 	set_target_properties(UTILITIES PROPERTIES
